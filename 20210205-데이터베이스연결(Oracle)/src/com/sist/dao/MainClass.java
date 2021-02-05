@@ -1,6 +1,34 @@
 package com.sist.dao;
 import java.sql.*;
-
+//VO , DAO
+/*
+*    SQL 
+*     = DML (데이터 조작언어)
+*         = SELECT : 데이터 검색 
+*             = JOIN
+*             = SUBQUERY
+*         = INSERT : 데이터 추가
+*         = UPDATE : 데이터 수정 
+*         = DELETE : 데이터 삭제 
+*     = DDL (데이터 선언언어) => 제약조건 (PRIMARY KEY , FOREIGN KEY , CHECK , UNIQUE , DEFAULT)
+*         = CREATE : 생성
+*            TABLE , VIEW , INDEX , SEQUENCE , PROCEDURE , FUNCTION , TRIGGER
+*         = ALTER : 수정
+*         = DROP : 삭제
+*         = TRUNCATE : 잘라내기
+*         = RENAME : 이름변경 
+*     = DCL (데이터 제어언어)
+*         = GRENT : 권한 부여
+*         = REVOKE : 권한 해제 
+*     = TCL (트랜잭션 제어언어)
+*         = COMMIT
+*         = ROLLBACK
+*         
+*    PL/SQL 
+*       ===
+*    ==
+*    함수를 만드는 언어 : 재사용
+*/
 public class MainClass {
 	public static void main(String[] args) {
 		try {
