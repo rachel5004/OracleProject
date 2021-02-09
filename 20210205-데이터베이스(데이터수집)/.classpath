@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/javaDev/jsoup-1.13.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/USER/Desktop/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/oracleDev/ojdbc6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
