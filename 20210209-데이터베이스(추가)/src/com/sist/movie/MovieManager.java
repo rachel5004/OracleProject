@@ -8,7 +8,7 @@ public class MovieManager {
 		try {
 			MovieDAO dao = new MovieDAO();
 			StringBuffer sb = new StringBuffer();
-			FileReader fr = new FileReader("c:\\javaDev\\movie.txt");
+			FileReader fr = new FileReader("C:\\oracleDev\\sql\\20210209\\movie.txt");
 			int i=0;
 			while((i=fr.read())!=-1) {
 				sb.append(String.valueOf((char)i));
@@ -30,6 +30,7 @@ public class MovieManager {
 				vo.setGrade(st.nextToken());
 				vo.setDirector(st.nextToken());
 				dao.movieInsert(vo);
+				Thread.sleep(100);
 			}
 		}catch(Exception e) {}
 	}
