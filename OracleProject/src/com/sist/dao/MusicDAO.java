@@ -3,43 +3,33 @@ package com.sist.dao;
 import java.util.*;// ArrayList
 import java.sql.*;
 public class MusicDAO {
-   // 연결하는 클래스 
-   private Connection conn;//오라클 연결 
-   // SQL문장으르 전송하는 클래스 
-   private PreparedStatement ps;
+   private Connection conn;  // connect oracle
+   private PreparedStatement ps; // send SQL
    private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
    //1. 연결 드라이버 설치 => 한번만 사용 (생성자)
-   public MusicDAO()
-   {
-	   try
-	   {
+   public MusicDAO() {
+	   try {
 		   Class.forName("oracle.jdbc.driver.OracleDriver");
 	   }catch(Exception ex){}
    }
    // 2. 연결 
-   public void getConnection()
-   {
-	   try
-	   {
+   public void getConnection() {
+	   try {
 		   conn=DriverManager.getConnection(URL,"hr","happy");
 		   // 오라클 => conn hr/happy
 	   }catch(Exception ex) {}
    }
    // 3. 해제
-   public void disConnection()
-   {
-	   try
-	   {
+   public void disConnection() {
+	   try {
 		   if(ps!=null) ps.close();// 통신(송신:OutputStream,수신:BufferReader)
 		   if(conn!=null) conn.close();// 연결기기: Socket
 	   }catch(Exception ex) {}
    }
    // 4. 기능 => 뮤직데이터 50개를 받아서 저장 ==> 저장된 데이터 브라우저에서 읽어서 출력 
-   public ArrayList<MusicVO> musicListData()
-   {
+   public ArrayList<MusicVO> musicListData() {
 	   ArrayList<MusicVO> list=new ArrayList<MusicVO>();
-	   try
-	   {
+	   try {
 		   // 1. 연결 
 		   getConnection();
 		   // 2. SQL문장을 만든다
@@ -49,8 +39,7 @@ public class MusicDAO {
 		   ps=conn.prepareStatement(sql);// 전송준비 
 		   // 3. SQL문장 전송 
 		   ResultSet rs=ps.executeQuery();
-		   // 4. 결과값을 가지고 온다 
-		   // 5. ArrayList에 담는다 
+		   // 4. 결과값을 ArrayList에 저장 
 		   /*
 		    *    =================
 		    *     no title...
@@ -66,8 +55,7 @@ public class MusicDAO {
 		    *                      | next() => false
 		    *    
 		    */
-		   while(rs.next())
-		   {
+		   while(rs.next()) {
 			   MusicVO vo=new MusicVO();
 			   vo.setNo(rs.getInt(1));
 			   vo.setTitle(rs.getString(2));
@@ -79,17 +67,47 @@ public class MusicDAO {
 			   list.add(vo);
 		   }
 		   rs.close();
-		   // 6. 대기상태 
-	   }catch(Exception ex)
-	   {
+		   // 5. 대기상태 
+	   }catch(Exception ex) {
 		   ex.printStackTrace();
 	   }
-	   finally
-	   {
+	   finally {
 		   disConnection(); // 닫기 (오류,정상 => 무조건 오라클을 닫는다)
 	   }
 	   return list;
    }
+	public void empFindData(String ename) {
+		try {
+			getConnection();
+			String sql = "SELECT ename,job,hiredate,sal FROM emp "
+					+ "WHERE ename LIKE '%'||?||'%'";
+			// 변수가 문자열로 들어오기 때문에 concat으로 연결해줘야함
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, ename);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				System.out.println("이름 "+rs.getString(1));
+				System.out.println("직위 "+rs.getString(2));
+				System.out.println("입사일 "+rs.getDate(3));
+				System.out.println("급여 "+rs.getInt(4));
+				System.out.println("======================");
+			}
+			rs.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			disConnection();
+		}
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("enter name : ");
+		String ename = sc.next();
+		MusicDAO dao = new MusicDAO();
+		dao.empFindData(ename);
+		
+	}
    
 }
 

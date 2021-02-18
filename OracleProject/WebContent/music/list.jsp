@@ -32,8 +32,7 @@
            <th>¾Ù¹ü</th>
          </tr>
          <%
-             for(MusicVO vo:list)
-             {
+             for(MusicVO vo:list){
          %>
                 <tr>
                   <td><%=vo.getNo() %></td>
@@ -41,20 +40,13 @@
                     <%
                         String state=vo.getState();
                         String str="";
-                        if(state.equals("»ó½Â"))
-                        {
+                        if(state.equals("»ó½Â")) {
                         	str="¡ã "+vo.getIdcrement();
-                        }
-                        else if(state.equals("ÇÏ°­"))
-                        {
+                        } else if(state.equals("ÇÏ°­")) {
                         	str="¡å "+vo.getIdcrement();
-                        }
-                        else if(state.equals("new"))
-                        {
+                        } else if(state.equals("new")) {
                         	str="new";
-                        }
-                        else
-                        {
+                        }else {
                         	str="-";
                         }
                     %>
