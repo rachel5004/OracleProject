@@ -106,8 +106,10 @@ public class MusicDAO {
 		String ename = sc.next();
 		MusicDAO dao = new MusicDAO();
 		dao.empFindData(ename);
+		sc.close();
 		
 	}
+	
    
 }
 
